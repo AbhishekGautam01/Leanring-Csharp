@@ -9,6 +9,7 @@
 ## Process vs Thread
 * Both are **independent sequence of execution**
 * Threads(of same process) can be run in a shared memory space while Process run in seperate memory space
+*  A thread is a context of execution, while a process is a bunch of resources associated with a computation. A process can have one or many threads.
 * Process has **virtual address space, executable code, open handles to system objects, a security context, a unique process identifier, environment variables, a priority class, minimum and maximum working set sizes and at lease one thread of execution**
 * Thread is an entity within a process that can be scheduled for execution. 
 * Each thread maintains **exception handlers, a scheduling priority, thread local storage, a unique thread identifier and a set of structures the system will use to save the thread context until it is scheduled. 
