@@ -4,7 +4,7 @@
 * There is **significant performance loss** and code becomes **hard to maintain**
 
 ## Important questions to ask before using reflection 
-1. Is there a way to solve the problem using genericity or class/interface inheritance?
+1. Is there a way to solve the problem using generics or class/interface inheritance?
 2. Can I solve the problem using dynamic invocations (only .NET 4.0 and above)?
 3. Is performance important, i.e. will my reflected method or instantiation call be called once, twice or a million times?
 4. Can I combine technologies to get to a smart but workable/understandable solution?

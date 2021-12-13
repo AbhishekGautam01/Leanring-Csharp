@@ -1,0 +1,99 @@
+-------------------
+Exception Handling
+-------------------
+
+Ques
+Please a make a .NET core console app for each of these topics by EOD
+
+•	Exception Handling in C#
+•	Exception class
+•	Inner exceptions
+•	Creating custom exceptions by inheriting the Exception class
+•	When clause in Exceptions
+•	Catching specific exceptions
+•	Exception call stack and stack trace
+•	Try, catch, finally
+•	Throwing exceptions
+•	Different kinds of exceptions
+•	Exception bubbling
+
+Ques In what scenarios will the finally block execute and in which it will not
+Ques can we have a try block without a catch ? yes if we use finally block
+Ques difference between through and throw ex
+ANS: That difference is the Stack Trace Information that gets sent with the exception
+"When you throw an exception using "throw ex" then you override the original stack trace with a new stack trace that starts from the throwing method."
+
+Ques. 
+using System;
+class MyProgram
+{
+  static void Main(string[] args)
+   {
+     int index = 6;
+     int[] arr = new int[5];
+     try
+     {
+        arr[index] = 100;
+     }    
+     catch(IndexOutOfRangeException e)
+     {
+       Console.WriteLine("Index out of bounds occurred");
+     }
+     Console.WriteLine("Program execution continued after Exception Handling");
+   }
+}
+
+ANs both console.log will run
+
+Q-10. What Will Be The Output Of The Following Code Snippet, If The Value Entered For The Index Is A String Like “Ab”:
+using System;
+class MyProgram
+{
+  static void Main(string[] args)
+  {
+    int index; 
+    int value = 100; 
+    int[] arr = new int[10]; 
+    try
+     {
+       Console.Write("Enter a number: ");
+       index = Convert.ToInt32(Console.ReadLine());
+       arr[index] = value;
+      }
+     catch(FormatException e)
+     {
+       Console.Write("Bad Format ");
+     }
+     catch(IndexOutOfRangeException e)
+     {
+      Console.Write("Index out of bounds ");
+     }
+     Console.Write("Remaining program ");
+  }
+}
+
+e) output: Index out of bounds Remaining program
+
+
+Q-11. What Will Be The Result Of The Following Code Snippet, If The Value Entered For The Index Is 9:
+using System;
+class MyProgram
+{
+  static void Main(string[] args)
+  {
+    int index; 
+    int value = 100; 
+    int[] arr = new int[10]; 
+    try
+     {
+       Console.Write("Enter a number: ");
+       index = Convert.ToInt32(Console.ReadLine());
+       arr[index] = value;
+      }
+     catch(Exception e)
+     {
+       Console.Write("Exception occurred");
+     }
+     Console.Write("Remaining program ");
+  }
+}

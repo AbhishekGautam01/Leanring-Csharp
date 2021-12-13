@@ -1,5 +1,5 @@
 # Process
-* Process is **program that is running on your computer** sucha as a small background task, or systems event handler or full blown application
+* Process is **program that is running on your computer** such as a small background task, or systems event handler or full blown application
 * **Process.Start()** calls external applications. We can start EXE as a process but to do so `we must pass target command along with desired arguments`
 * Process is **platform neutral**. Code is resilient and cross-platform 
 * Namespace: **System.Diagnostics** 
@@ -8,7 +8,7 @@
 
 ## Process vs Thread
 * Both are **independent sequence of execution**
-* Threads(of same process) can be run in a shared memory space while Process run in seperate memory space
+* Threads(of same process) can be run in a shared memory space while Process run in separate memory space
 *  A thread is a context of execution, while a process is a bunch of resources associated with a computation. A process can have one or many threads.
 * Process has **virtual address space, executable code, open handles to system objects, a security context, a unique process identifier, environment variables, a priority class, minimum and maximum working set sizes and at lease one thread of execution**
 * Thread is an entity within a process that can be scheduled for execution. 
@@ -21,7 +21,7 @@
 * Example: See **GetProcessesExample.cs**
 
 ### GetProcessByName
-* It returns **array of process objects**. It's functionality can be dervied by combining other methods such as *GetProcesses*
+* It returns **array of process objects**. It's functionality can be derived by combining other methods such as *GetProcesses*
 * Example: See *GetProcessByNameExample.cs*
 
 ### RedirectStandardOutput 
@@ -30,7 +30,7 @@
 * See Example *RedirectStandardOutputExample.cs*
 
 ### Kill
-* We can kill or terminate a process that we aquire a reference to. The process is not given a chance to continue. 
+* We can kill or terminate a process that we acquire a reference to. The process is not given a chance to continue. 
 * See example: KillExample.cs
 
 

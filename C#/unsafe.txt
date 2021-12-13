@@ -1,0 +1,6 @@
+what are the different types the pointer can point to 
+	primitive value types
+	struct containing value types
+	other pointer types
+
+how to obtain value and adress

@@ -7,6 +7,8 @@
 [`Futher detailed explanation here`](https://stackoverflow.com/a/38145183)
 <br />
 * In C# multi-threading system is built upon the Thread Class which **execution of threads**. It is defined under **System.Threading**
+* CLR assignes threads their own stack and they maintain their own copy of local variables
+* Threads **share data** if they have common reference to the same object instance or data is shared through static variables. 
 
 ### LifeCycle of thread 
 ![ThreadLifeCycle](../.idea/ThreadLifeCycle.jpg)
@@ -37,10 +39,10 @@
 
 ### Foreground and background threads
 * A managed thread is either background or foreground thread. 
-* Both threads are identical **except background thread doesnt keep the managed execution environment running.**
-* Once all foreground threads are stopped in managed process(where exe file is a manahed assembly), the **system stops all background threads** and shuts down. 
+* Both threads are identical **except background thread doesn't keep the managed execution environment running.**
+* Once all foreground threads are stopped in managed process(where exe file is a managed assembly), the **system stops all background threads** and shuts down. 
 *  Use **Thread.IsBackground** to see if it is background thread or change it at any point of time to back ground thread. 
-* Unhaandled exceptions in both types of threads **results in termination of application**
+* Unhandled exceptions in both types of threads **results in termination of application**
 * Threads **belonging to managed thread pool**(IsThreadPoolThread property is **true**) are **background threads**
 * All threads created by *8starting a new thread* are by default **foreground thread**
 
@@ -49,7 +51,7 @@
 * See [`code example here`](https://docs.microsoft.com/en-us/dotnet/api/system.threadstaticattribute?view=net-5.0#examples)
 
 ### Joining threads
-* Join() makes **one thread wait untill another thread completes it's execution**
+* Join() makes **one thread wait until another thread completes it's execution**
 * If t is a Thread object whose thread is currently executing, then t.Join() causes the current thread to pause its execution until thread it joins completes its execution.
 * There are below **3 overloads of join methods**
     * **Join() method**

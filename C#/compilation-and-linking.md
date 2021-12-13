@@ -12,6 +12,6 @@
 1. **Compilation**: Individual C# Code files are compiled into individual compiled units. These *individual compiled code files* go in the **OBJ directory**. This is for **intermediate object files/Compiled binary files**
 2. **Linking**: In this phase, the individual files are **linked to create single unit DLL and EXE**. This goes into **BIN** directory
 
-> **IMPORTANT** Each of these folder is diveded into *build* and *debug* folders which corressponds to project build configuration. 
+> **IMPORTANT** Each of these folder is divided into *build* and *debug* folders which corresponds to project build configuration. 
 
 ![CNL](.idea/Linking.png)
