@@ -47,4 +47,27 @@ Finally, the rest of the code is executed and upon completion the final result i
         * For this the await operation return Task or Task\<T> 
 
 ## Deep Dive Task and Task\<T> for an I/O-Bound Operation
+* A key takeaway for I/O Bound task is there is no dedicated thread for running the task. No thread is waiting for data to comeback. 
+* Lifetime: 
+    * Time spent on everything until async method arrives at an await & yields control back to its caller. 
+    * Time spent on IO with no CPU cost. 
+    * Time spent for passing control back to the async method, at which point it continues its execution sync
+* For a server scenario, this means that,**because there are no threads dedicated to blocking on unfinished tasks, the server thread pool can service a much higher volume of web requests.**
+* For a client scenario, this means **increased responsiveness by not blocking the UI thread until a specific operation is complete.**
 
+## Deep Dive Task and Task\<T> for a CPU-Bound Operation
+* In the context a CPU-Bound operation, because the work is done on the CPU, there's no way to get around dedicating a thread to the computation.
+* The use of async and await provides you with a clean way to interact with a background thread and keep the caller of the async method responsive.
+> **NOTE**: This does not provide any protection for shared data. If you are using shared data, you will still need to apply an appropriate synchronization strategy.
+
+
+## Blocking vs Non Blocking Code 
+* **Blokcing Code** is code which blocks execution of the current thread for a specified amount of time untill another operation is completed. 
+* The Thread waits synchronously
+```
+System.Threading.Thread.Sleep(1000);
+var myTask = client.GetStringAsync("url");
+myTask.GetAwaitter().GetResult();
+myTask.Wait();
+```
+* **Non Blocking Code**: 
