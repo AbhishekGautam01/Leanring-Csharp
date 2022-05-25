@@ -70,4 +70,63 @@ var myTask = client.GetStringAsync("url");
 myTask.GetAwaitter().GetResult();
 myTask.Wait();
 ```
-* **Non Blocking Code**: 
+* **Non Blocking Code**: The current thread is free to do other things during waiting. This means the developer can provide work to original thread while awaiting is task. 
+* This means the **UI Thread** can remain responsive to other user interactions. 
+* Without no GUI also we get **greater stability, allowing a single server to handle more request concurrently. 
+
+## Blocking && Non Blocking Excercize
+```
+void OnButtonClick(){
+
+    DownloadAndBlur("url")
+    ShowDailog("Success")
+}
+
+DownloadAndBlur(string url){
+await DownloadImage(url);
+await BlurImage(...);
+await SaveImage(...);
+}
+
+```
+* The success dialog will be displayed before the download/blur operation completes. 
+
+## Demystified Async Await 
+* let say you want to do GetDataASync and then with Task you get you want to do PutDataAsync() passing result of GetDataAysnc() which return a task and then we can print done. Code: 
+```
+Task<int> t = GetDataAsync();
+t.ContinueWith(a => {
+    var t2 = PutDataAsync(a.Result);
+    t2.ContinueWith(b => Console.WriteLine("done"));
+});
+```
+* the begining of async methods runs like any other method untill await is encountered(or exception is thrown).
+* 
+
+### Synchronization context 
+* On Await, the awaitable will capture the current **captured context** and later apply it to the remainder of the aysnc method. 
+* **Captured Context**: CLR remembers the execution context before suspending the work at await at tried to re-apply it on the continuation. 
+* For UI it will run on same UI thread, for ASP net core it will run get to same HTTPContext/previous context. 
+> For application with no context such as console, the continuation runs on any ThreadPool thread. 
+* For cases where you dont need to go back to old context you can do this by calling **ConfigureAwait** and passing false. 
+
+### Awaiter Pattern
+* Await operation is just a syntactical sugar: 
+* For a type to be awaitable: 
+    * it needs to have following method: **INotifyCompletion GetAwaiter()**
+    * The return type of GetAwaiter method needs to have:: 
+        * IsCompleted property of type bool 
+        * GetResult() which returns void 
+
+### Behind the compiler scenes
+* At some point, after an await is encountered, a method needs to **wake up** and complete that code after await 
+* If you see call stack you would see: 
+    * **AsyncStateMachineBox.MoveNext()**
+    **AsyncTaskMethodBuilder.SetResult()**
+* This means compiler is building lot of code behind our back to kep **track of execution state**
+* Whenever the compiler sees an **async method in our code, it turns it into a state machine** which is actually a class. 
+* The compiler generated class **implements IAsyncStateMachine interface** . it encapsulates all variables of your method as fields and splits your code into sections, that are executed as **state machine transaction between states**. 
+* This is done to ensure **a thread can leave method and when ti comes back, the state is intact** 
+* This class has methods: 
+    * **MoveNext** - Moves the state machine to next state
+    * **SetStateMachine(IAsyncStateMachine)** - Configures the state machine with **heap allocated replica** 
